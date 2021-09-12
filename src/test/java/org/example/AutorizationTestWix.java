@@ -19,6 +19,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
+
+import java.sql.Time;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -43,33 +45,17 @@ public class AutorizationTestWix {
     public void main() {
         driver.get("https://users.wix.com/signin?view=sign-up&sendEmail=true&postSignUp=https:%2F%2Fuk.wix.com%2Fnew%2Fintro&loginCompName=Signup_H&referralInfo=Signup_H&postLogin=https:%2F%2Fuk.wix.com%2Fmy-account%2Fsites&forceRender=true");
         driver.manage().window().setSize(new Dimension(1920, 1080));
-        assertTrue(driver.findElement(By.id("input_0")).isEnabled());
-        driver.findElement(By.id("input_0")).click();
-        driver.findElement(By.id("input_0")).sendKeys("sasha.ivanenko10@mail.ru");
-        assertTrue(driver.findElement(By.id("input_1")).isEnabled());
-        driver.findElement(By.id("input_1")).click();
-        driver.findElement(By.id("input_1")).sendKeys("1234567890");
-        {
-            WebElement element = driver.findElement(By.name("submit"));
-            Actions builder = new Actions(driver);
-            assertTrue(element.isEnabled());
-            builder.moveToElement(element).clickAndHold().perform();
-        }
-        {
-            WebElement element = driver.findElement(By.name("submit"));
-            Actions builder = new Actions(driver);
-            assertTrue(element.isEnabled());
-            builder.moveToElement(element).perform();
-        }
-        {
-            WebElement element = driver.findElement(By.name("submit"));
-            Actions builder = new Actions(driver);
-            assertTrue(element.isEnabled());
-            builder.moveToElement(element).release().perform();
-        }
+        AutorizationPageWix autorizationPageWix = new AutorizationPageWix(driver);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        assertTrue(driver.findElement(By.name("submit")).isEnabled());
-        driver.findElement(By.name("submit")).click();
+        autorizationPageWix.clickLoginformUsername();
+        autorizationPageWix.setLoginformUsername("sasha.ivanenko10@mail.ru");
+        autorizationPageWix.clickLoginformPassword();
+        autorizationPageWix.setLoginformPassword("1234567890");
+        autorizationPageWix.clickAndHoldEnter().performEnter();
+        autorizationPageWix.performEnter();
+        autorizationPageWix.releaseEnter().performEnter();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        autorizationPageWix.clickEnter();
         driver.close();
         System.out.println("Test ended sucessfully!");
     }

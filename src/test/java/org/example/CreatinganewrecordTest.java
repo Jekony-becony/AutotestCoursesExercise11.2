@@ -42,39 +42,31 @@ public class CreatinganewrecordTest {
   @Test
   public void creatinganewrecord() {
     driver.get("https://diary.ru/");
+    AutorizationPage autorizationPage = new AutorizationPage(driver);
     driver.manage().window().setSize(new Dimension(1536, 864));
-    assertTrue(driver.findElement(By.linkText("Вход")).isEnabled());
-    driver.findElement(By.linkText("Вход")).click();
-    assertTrue(driver.findElement(By.id("loginform-username")).isEnabled());
-    driver.findElement(By.id("loginform-username")).click();
-    driver.findElement(By.id("loginform-username")).sendKeys("sasha911a");
-    assertTrue(driver.findElement(By.id("loginform-password")).isEnabled());
-    driver.findElement(By.id("loginform-password")).click();
-    driver.findElement(By.id("loginform-password")).sendKeys("Co#gMpVcui");
+    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    autorizationPage.clickEnter();
+    autorizationPage.clickLoginformUsername();
+    autorizationPage.setLoginformUsername("sasha911a");
+    autorizationPage.clickLoginformPassword();
+    autorizationPage.setLoginformPassword("Co#gMpVcui");
     driver.switchTo().frame(0);
-    assertTrue(driver.findElement(By.cssSelector(".recaptcha-checkbox-border")).isEnabled());
-    driver.findElement(By.cssSelector(".recaptcha-checkbox-border")).click();
+    autorizationPage.clickRecaptcha();
     driver.switchTo().defaultContent();
-    assertTrue(driver.findElement(By.id("login_btn")).isEnabled());
-    driver.findElement(By.id("login_btn")).click();
-    driver.manage().window().setSize(new Dimension(1536, 864));
+    autorizationPage.clickLogin();
     driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-    assertTrue(driver.findElement(By.cssSelector("#writeThisDiary .alt")).isEnabled());
-    driver.findElement(By.cssSelector("#writeThisDiary .alt")).click();
-    assertTrue(driver.findElement(By.id("postTitle")).isEnabled());
-    driver.findElement(By.id("postTitle")).click();
-    driver.findElement(By.id("postTitle")).sendKeys("Новая запись");
+    CreatingNewRecordPage creatingNewRecordPage = new CreatingNewRecordPage(driver);
+    creatingNewRecordPage.clickCreateRecord();
+    creatingNewRecordPage.clickTittle();
+    creatingNewRecordPage.clickPostTittle().addPostTittle("Новая запись");
     driver.switchTo().frame(1);
-    assertTrue(driver.findElement(By.cssSelector("html")).isEnabled());
     driver.findElement(By.cssSelector("html")).click();
     {
       WebElement element = driver.findElement(By.id("tinymce"));
-      assertTrue(element.isEnabled());
       js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = 'Новая запись в мой дневник'}", element);
     }
     driver.switchTo().defaultContent();
-    assertTrue(driver.findElement(By.id("rewrite")).isEnabled());
-    driver.findElement(By.id("rewrite")).click();
+    creatingNewRecordPage.clickRewrite();
     System.out.println("Test ended sucessfully!");
   }
 }

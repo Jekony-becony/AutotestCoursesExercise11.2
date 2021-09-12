@@ -43,59 +43,27 @@ public class CreatingCopyOfTheProjectWixTest {
   public void creatingcopyoftheeproject() {
     driver.get("https://manage.wix.com/dashboard/0a4edbce-85c3-4c65-ab6f-b3269d24c898/home");
     driver.manage().window().setSize(new Dimension(1920, 1080));
-    assertTrue(driver.findElement(By.id("input_0")).isEnabled());
-    driver.findElement(By.id("input_0")).click();
-    driver.findElement(By.id("input_0")).sendKeys("sasha.ivanenko10@mail.ru");
-    assertTrue(driver.findElement(By.id("input_1")).isEnabled());
-    driver.findElement(By.id("input_1")).click();
-    driver.findElement(By.id("input_1")).sendKeys("1234567890");
-    {
-      WebElement element = driver.findElement(By.name("submit"));
-      Actions builder = new Actions(driver);
-      assertTrue(element.isEnabled());
-      builder.moveToElement(element).clickAndHold().perform();
-    }
-    {
-      WebElement element = driver.findElement(By.name("submit"));
-      Actions builder = new Actions(driver);
-      assertTrue(element.isEnabled());
-      builder.moveToElement(element).perform();
-    }
-    {
-      WebElement element = driver.findElement(By.name("submit"));
-      Actions builder = new Actions(driver);
-      assertTrue(element.isEnabled());
-      builder.moveToElement(element).release().perform();
-    }
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    assertTrue(driver.findElement(By.name("submit")).isEnabled());
-    driver.findElement(By.name("submit")).click();
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    assertTrue(driver.findElement(By.cssSelector(".buttonnext1836296042__suffix")).isEnabled());
-    driver.findElement(By.cssSelector(".buttonnext1836296042__suffix")).click();
-    assertTrue(driver.findElement(By.cssSelector("div:nth-child(4) > .ListItemAction226466562__root .Text95380606__root")).isEnabled());
-    driver.findElement(By.cssSelector("div:nth-child(4) > .ListItemAction226466562__root .Text95380606__root")).click();
-    {
-      WebElement element = driver.findElement(By.xpath("//div[@id=\'wsr-modal1\']/div/div[3]/div/div/button[2]/span"));
-      Actions builder = new Actions(driver);
-      assertTrue(element.isEnabled());
-      builder.moveToElement(element).clickAndHold().perform();
-    }
+    AutorizationPageWix autorizationPageWix = new AutorizationPageWix(driver);
     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    {
-      WebElement element = driver.findElement(By.xpath("//div[@id=\'wsr-modal1\']/div/div[3]/div/div/button[2]/span"));
-      Actions builder = new Actions(driver);
-      assertTrue(element.isEnabled());
-      builder.moveToElement(element).perform();
-    }
-    {
-      WebElement element = driver.findElement(By.xpath("//div[@id=\'wsr-modal1\']/div/div[3]/div/div/button[2]/span"));
-      Actions builder = new Actions(driver);
-      assertTrue(element.isEnabled());
-      builder.moveToElement(element).release().perform();
-    }
-    assertTrue(driver.findElement(By.xpath("//div[@id=\'wsr-modal1\']/div/div[3]/div/div/button[2]/span")).isEnabled());
-    driver.findElement(By.xpath("//div[@id=\'wsr-modal1\']/div/div[3]/div/div/button[2]/span")).click();
+    autorizationPageWix.clickLoginformUsername();
+    autorizationPageWix.setLoginformUsername("sasha.ivanenko10@mail.ru");
+    autorizationPageWix.clickLoginformPassword();
+    autorizationPageWix.setLoginformPassword("1234567890");
+    autorizationPageWix.clickAndHoldEnter().performEnter();
+    autorizationPageWix.performEnter();
+    autorizationPageWix.releaseEnter().performEnter();
+    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    autorizationPageWix.clickEnter();
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+    CreatingCopyOfTheProjectWixPage creatingCopyOfTheProjectWixPage = new CreatingCopyOfTheProjectWixPage(driver);
+    creatingCopyOfTheProjectWixPage.clickButtonNext();
+    creatingCopyOfTheProjectWixPage.clickNthChild();
+    creatingCopyOfTheProjectWixPage.clickAndHoldCreateCopy().performCreateCopy();
+    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    creatingCopyOfTheProjectWixPage.performCreateCopy();
+    creatingCopyOfTheProjectWixPage.releaseCreateCopy().performCreateCopy();
+    creatingCopyOfTheProjectWixPage.clickCreateCopy();
     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     driver.close();
     System.out.println("Test eneded sucessfully");

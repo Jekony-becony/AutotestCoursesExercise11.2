@@ -22,6 +22,8 @@ import org.openqa.selenium.Keys;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
 public class AutorizationTest {
   private WebDriver driver;
   private Map<String, Object> vars;
@@ -40,21 +42,18 @@ public class AutorizationTest {
   @Test
   public void main() {
     driver.get("https://diary.ru/");
+    AutorizationPage autorizationPage = new AutorizationPage(driver);
     driver.manage().window().setSize(new Dimension(1536, 864));
-    assertTrue(driver.findElement(By.linkText("Вход")).isEnabled());
-    driver.findElement(By.linkText("Вход")).click();
-    assertTrue(driver.findElement(By.id("loginform-username")).isEnabled());
-    driver.findElement(By.id("loginform-username")).click();
-    driver.findElement(By.id("loginform-username")).sendKeys("sasha911a");
-    assertTrue(driver.findElement(By.id("loginform-password")).isEnabled());
-    driver.findElement(By.id("loginform-password")).click();
-    driver.findElement(By.id("loginform-password")).sendKeys("Co#gMpVcui");
+    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    autorizationPage.clickEnter();
+    autorizationPage.clickLoginformUsername();
+    autorizationPage.setLoginformUsername("sasha911a");
+    autorizationPage.clickLoginformPassword();
+    autorizationPage.setLoginformPassword("Co#gMpVcui");
     driver.switchTo().frame(0);
-    assertTrue(driver.findElement(By.cssSelector(".recaptcha-checkbox-border")).isEnabled());
-    driver.findElement(By.cssSelector(".recaptcha-checkbox-border")).click();
+    autorizationPage.clickRecaptcha();
     driver.switchTo().defaultContent();
-    assertTrue(driver.findElement(By.id("login_btn")).isEnabled());
-    driver.findElement(By.id("login_btn")).click();
+    autorizationPage.clickLogin();
     System.out.println("Test ended sucessfully!");
   }
 }
