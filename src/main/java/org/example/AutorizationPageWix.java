@@ -5,22 +5,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class AutorizationPageWix {
     private WebDriver driver;
-    @FindBy(xpath = "/html/body/login-dialog/div/login/div/form/div[3]/div[1]/div[3]/div/button")
+    @FindBy(name= "submit")
     private WebElement enter;
-    @FindBy(xpath = "/html/body/login-dialog/div/login/div/form/div[3]/div[1]/desktop-input-new[1]/md-input-container/input")
+    @FindBy(name = "email")
     private WebElement loginformUsername;
-    @FindBy(xpath = "/html/body/login-dialog/div/login/div/form/div[3]/div[1]/desktop-input-new[2]/md-input-container/input")
+    @FindBy(name = "password")
     private WebElement loginformPassword;
-    @FindBy(xpath = "//*[@id=\"recaptcha-anchor\"]")
+    @FindBy(id = "recaptcha-anchor-label")
     private WebElement recaptcha;
-    @FindBy(id = "login_btn")
-    private WebElement login;
     public AutorizationPageWix(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -28,11 +25,6 @@ public class AutorizationPageWix {
     public AutorizationPageWix clickRecaptcha() {
         assertTrue(recaptcha.isEnabled());
         recaptcha.click();
-        return this;
-    }
-    public AutorizationPageWix clickLogin() {
-        assertTrue(login.isEnabled());
-        login.click();
         return this;
     }
     public AutorizationPageWix clickLoginformUsername() {

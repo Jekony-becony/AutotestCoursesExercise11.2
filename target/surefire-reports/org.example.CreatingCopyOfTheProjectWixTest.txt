@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+Test set: org.example.CreatingCopyOfTheProjectWixTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 21.19 s <<< FAILURE! - in org.example.CreatingCopyOfTheProjectWixTest
+creatingcopyoftheeproject  Time elapsed: 21.189 s  <<< ERROR!
+org.openqa.selenium.NoSuchElementException: 
+no such element: Unable to locate element: {"method":"xpath","selector":"//span[@class='s2OqYb sOSHl9 o3e0Ed---ellipsisLines-10-singleLine']"}
+  (Session info: chrome=93.0.4577.82)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-C16351B', ip: '192.168.0.108', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 93.0.4577.82, chrome: {chromedriverVersion: 93.0.4577.63 (ff5c0da2ec0ad..., userDataDir: C:\Users\sasha\AppData\Loca...}, goog:chromeOptions: {debuggerAddress: localhost:49527}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1923f2cb034b8d7a4ae30da68ab8d985
+*** Element info: {Using=xpath, value=//span[@class='s2OqYb sOSHl9 o3e0Ed---ellipsisLines-10-singleLine']}
+	at org.example.CreatingCopyOfTheProjectWixTest.creatingcopyoftheeproject(CreatingCopyOfTheProjectWixTest.java:64)
+

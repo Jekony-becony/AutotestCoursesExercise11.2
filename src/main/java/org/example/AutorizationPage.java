@@ -5,18 +5,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class AutorizationPage {
     private WebDriver driver;
-    @FindBy(xpath = "//*[@id=\"navbar_user-collapse\"]/ul[1]/li[1]/a")
+    @FindBy(xpath = "//span[@class='i-lock']")
     private WebElement enter;
     @FindBy(id = "loginform-username")
     private WebElement loginformUsername;
     @FindBy(id = "loginform-password")
     private WebElement loginformPassword;
-    @FindBy(xpath = "//*[@id=\"recaptcha-anchor\"]")
+    @FindBy(id = "recaptcha-anchor-label")
     private WebElement recaptcha;
     @FindBy(id = "login_btn")
     private WebElement login;
@@ -30,17 +30,17 @@ public class AutorizationPage {
         return this;
     }
     public AutorizationPage clickLogin() {
-        assertTrue(recaptcha.isEnabled());
+        assertTrue(login.isEnabled());
         login.click();
         return this;
     }
     public AutorizationPage clickLoginformUsername() {
-        assertTrue(recaptcha.isEnabled());
+        assertTrue(loginformUsername.isEnabled());
         loginformUsername.click();
         return this;
     }
     public AutorizationPage clickLoginformPassword() {
-        assertTrue(recaptcha.isEnabled());
+        assertTrue(loginformPassword.isEnabled());
         loginformPassword.click();
         return this;
     }
